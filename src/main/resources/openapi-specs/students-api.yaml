@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: Students APIs
+  description: Students APIs
+  version: 0.0.0
+servers:
+  - url: 'http://localhost:8080'
+  - url: 'https://sandbox.api.prashantmokani.com'
+paths:
+  /students:
+    get:
+      operationId: listStudents
+      summary: Fetch List of Students
+      responses:
+        '200':
+          description: success response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudentsPage"
+
+
+components:
+  schemas:
+    Student:
+      type: object
+      description: Students Schema
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        city:
+          type: string
+    Students:
+      type: array
+      items:
+        $ref: "#/components/schemas/Student"
+    StudentsPage:
+      type: object
+      properties:
+        total:
+          type: number
+          description: total students
+        students:
+          type: array
+          items:
+            $ref: "#/components/schemas/Student"
